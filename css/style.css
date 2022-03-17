@@ -1,0 +1,13 @@
+.main-div {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.list-div {
+    width: 25%;
+    display: inline-block;
+    border: 1px solid #000;
+    text-align: center;
+    margin-bottom: 4px;
+    
+}
