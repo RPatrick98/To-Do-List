@@ -136,3 +136,48 @@ function updateTask($data7) {
 	$query->bindParam(":id", $data7["id"]);
 	$query->execute();
 }
+
+// time sort 
+
+function getTimeHigh() {
+	$conn = openDatabaseConnection();
+	$query = $conn->prepare("SELECT * FROM tasks ORDER BY task_time ASC");
+	$query->execute();
+	$result = $query->fetchAll();
+	return $result;
+}
+
+function getTimeLow() {
+	$conn = openDatabaseConnection();
+	$query = $conn->prepare("SELECT * FROM tasks ORDER BY task_time DESC");
+	$query->execute();
+	$result = $query->fetchAll();
+	return $result;
+}
+
+// filter status
+
+function getStatusOpen() {
+	$conn = openDatabaseConnection();
+	$query = $conn->prepare("SELECT * FROM tasks WHERE task_status = 'Open'");
+	$query->execute();
+	$result = $query->fetchAll();
+	return $result;
+}
+
+function getStatusProcces() {
+	$conn = openDatabaseConnection();
+	$query = $conn->prepare("SELECT * FROM tasks WHERE task_status = 'In Procces'");
+	$query->execute();
+	$result = $query->fetchAll();
+	return $result;
+}
+
+function getStatusClosed() {
+	$conn = openDatabaseConnection();
+	$query = $conn->prepare("SELECT * FROM tasks WHERE task_status = 'Closed'");
+	$query->execute();
+	$result = $query->fetchAll();
+	return $result;
+}
+

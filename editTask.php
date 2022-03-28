@@ -33,13 +33,13 @@ if( $_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 ?>
-<h1></h1>
-<div class="main-div">
+
+<div class="editpage-div">
+    <p>Task description</p>
     <form method="POST">
-        <label for="updateContentTask">Task description</label>
         <textarea name="updateContentTask" id="contentTask" cols="30" rows="2"><?=$oneTask[0]["task_description"]?></textarea>
-        <label for="updateTime">how long will it take</label>
-        <input name="updateTime" type="number" value="<?=$oneTask[0]["task_time"]?>">
+        <label for="updateTime">Duration</label>
+        <input id="time" name="updateTime" type="number" value="<?=$oneTask[0]["task_time"]?>">
         <select name="updateTaskStatus" id="taskStatus">
         <?php
             foreach ($statusOptions as $statusOption) {
@@ -49,7 +49,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST") {
          }
         ?>
         </select>
-        <button type="submit">Update task</button>
+        <button class="button" type="submit">Update task</button>
     </form>
 </div>
 

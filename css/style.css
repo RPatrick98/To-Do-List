@@ -8,29 +8,90 @@
 .list-div {
     width: 33%;
     display: inline-block;
-    border: 1px solid #000;
     text-align: center;
     margin-bottom: 4px;
-    padding: 25px;
+    padding: 20px;
     background-color: #EBECF0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    margin-bottom: 40px;
     
 }
 
-#editName {
-    width: 70%;
+.edit-name {
+    margin-bottom: 10px;
 }
+
+#editName {
+    width: 95%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+
+
 
 .task-div {
     margin-top: 30px;
     margin-bottom: 30px;
     background-color: #ffffff;
     padding: 10px;
-    text-align: left !important;
+    border-radius: 10px;
+    width: 94%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.button {
+    background-color: #0275d8;
+  border: none;
+  color: white;
+  padding: 8px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.create {
+    background-color: #5cb85c;
+    border: none;
+    color: white;
+    padding: 8px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.del {
+    background-color: #d9534f;
+    border: none;
+    color: white;
+    padding: 8px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
 .desc-task {
-   width: 33%;
+   width: 50%;
    display: inline;
+   align-items: center;
+   margin-right: 10px;
 
 }
 
@@ -38,8 +99,15 @@
 .desc-task > p {
     width: 33%;
     display: inline;
- 
+    
  }
+
+
+.btn-task {
+    width: 50%;
+    display: inline;
+    
+}
 
 .edit-task {
     width: 33%;
@@ -56,17 +124,66 @@
     display: inline;
 }
 
-.
 
-input[type="number"] {
-    width: 20%;
-}
 
 textarea#contentTask {
-    width: 92%;
+    width: 95%;
     margin-bottom: 20px;
+
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+#time {
+    width: 50%;
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 #add-btn {
     margin-top: 20px;
+    
+}
+
+.editpage-div {
+    width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 4px;
+    padding: 25px;
+    background-color: #EBECF0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+   
+}
+
+.new-list {
+    background-color: #EBECF0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    width: 34%;
+    padding: 20px;
+}
+
+#newtask {
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }

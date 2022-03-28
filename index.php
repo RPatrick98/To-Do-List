@@ -10,6 +10,9 @@ $tasks = getAllTasks();
 
 $statusOptions = getAllStatus();
 
+$timeLow = getTimeLow();
+$timeHigh = getTimeHigh();
+
 
 
 
@@ -42,7 +45,25 @@ if( $_SERVER["REQUEST_METHOD"] == "POST") {
         );
         deleteTask($data5);
         header("location: index.php");
+    } else if(isset($_POST['stuf'])) {
+        if ($_POST['stuff'] === 'low')  {
+            $tasks = getTimeLow();
+        } else if ($_POST['stuff'] === 'high') {
+            $tasks = getTimeHigh();
+        }
     }
+    
+    else if(isset($_POST['status'])) {
+        if ($_POST['status'] === 'open') {
+            $tasks = getStatusOpen();
+        } else if ($_POST['status'] === 'procces') {
+            $tasks = getStatusProcces();
+        } else if ($_POST['status'] === 'closed') {
+            $tasks = getStatusClosed() ;
+        }
+    }
+
+    
     
     
     else {
@@ -83,6 +104,7 @@ if(isset($_GET["id"])) {
   
 
     <div class="main-div">
+        
         <?php
         foreach ($lists as $list) {
         ?>
@@ -90,15 +112,38 @@ if(isset($_GET["id"])) {
 
             
             <h2><?=$list["list_name"]?></h2>
-            <form method="POST">
-                <div>  
-                    <input type="hidden" id="<?=$list["id"]?>" name="id" value="<?=$list["id"]?>">
-                    <input name="editName" id="editName" type="text">
-                    <button type="submit">Edit name</button>
-                </div>
-            </form>
+            <div class="edit-name"> 
+                <form method="POST">
+                    
+                        <input type="hidden" id="<?=$list["id"]?>" name="id" value="<?=$list["id"]?>">
+                        <input  placeholder="Edit name" name="editName" id="editName" type="text">
+                        <button class="button" type="submit">Edit name</button>
+                        <a href="index.php?id=<?=$list["id"]?>" class="del">Delete</a>
+                    
+                </form>
+            </div>
+           
                 
-            <a href="index.php?id=<?=$list["id"]?>">Delete</a>
+            <div class="sort-time">
+                <form method="POST">
+                    <select name="stuff">
+                        <option value="low">Decreasing time</option>
+                        <option value="high">Increasing time</option>
+                    </select>
+                    <input type="submit" value="Sort">
+                </form>
+             </div>
+
+             <div class="filter-status">
+                <form method="POST">
+                    <select name="status">
+                        <option value="open">Open</option>
+                        <option value="procces">In Procces</option>
+                        <option value="closed">Closed</option>
+                    </select>
+                    <input type="submit" value="Filter">
+                </form>
+             </div>
             
 
             <?php 
@@ -115,17 +160,22 @@ if(isset($_GET["id"])) {
                 <div class="desc-task">
                     <p><?=$task["task_description"]?></p>
                 </div>
+
+
+                <div class="btn-task">
+                    <div class="edit-task">
+                    <a href="editTask.php?id=<?=$task["id"]?>" class="button">Edit</a>
+                    </div>
                 
-                <div class="edit-task">
-                   <a href="editTask.php?id=<?=$task["id"]?>">Edit Task</a>
+                    <div class="delete-task">
+                        <form method="POST">
+                            <input type="hidden" id="<?=$task["list_id"]?>" name="taskID" value="<?=$task["id"]?>">
+                            <button class="del">Delete</button>
+                        </form>
+                    </div>
                 </div>
-               
-                <div class="delete-task">
-                    <form method="POST">
-                        <input type="hidden" id="<?=$task["list_id"]?>" name="taskID" value="<?=$task["id"]?>">
-                        <button>delete task</button>
-                    </form>
-                </div>
+                
+                
                 
                 
             </div>
@@ -142,7 +192,7 @@ if(isset($_GET["id"])) {
                         <input type="hidden" id="<?=$list["id"]?>" name="idList" value="<?=$list["id"]?>">
                         <textarea name="contentTask" placeholder="Add another card" id="contentTask" cols="30" rows="2"></textarea>
                         <label for="time">Duration</label>
-                        <input name="time" type="number">
+                        <input id="time" name="time" type="number">
                         <select name="taskStatus" id="taskStatus">
 
                             <?php
@@ -155,7 +205,7 @@ if(isset($_GET["id"])) {
 
 
                         </select>
-                        <button type="submit" id="add-btn">Add new task</button>
+                        <button class="create" type="submit" id="add-btn">Add new task</button>
                     </div>
                 </form>
             </div>
@@ -173,13 +223,17 @@ if(isset($_GET["id"])) {
 
 
         ?>
-        <form method="POST">
-            <div>
-                <label for="nameList">Add new list</label>
-                <input name="nameList" id="nameList" type="text">
-                <button type="submit" id="">Add</button>
-            </div>
-        </form>
+
+        <div class="new-list">
+            <form method="POST">
+                <div>
+                    <label for="nameList">Add new list</label>
+                    <input id="newtask" name="nameList" id="nameList" type="text">
+                    <button class="create" type="submit" id="">Add</button>
+                </div>
+            </form>
+        </div>
+        
         
     </div>
 
