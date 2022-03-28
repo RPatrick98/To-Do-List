@@ -1,10 +1,14 @@
 <?php
 
+require('resources/header.php');
+
 include("resources/functions.php");
 
 $lists = getAllLists();
 
 $tasks = getAllTasks();
+
+$statusOptions = getAllStatus();
 
 
 
@@ -24,7 +28,11 @@ if( $_SERVER["REQUEST_METHOD"] == "POST") {
     } else if(isset($_POST['contentTask'])) {
         $data4 = array(
             "idList" => $_POST["idList"],
-            "contentTask" => $_POST["contentTask"]
+            "contentTask" => $_POST["contentTask"],
+            "time" => $_POST["time"],
+            "taskStatus" => $_POST["taskStatus"]
+
+
         );
         createTask($data4);
         header("location: index.php");
@@ -59,6 +67,7 @@ if(isset($_GET["id"])) {
         "id" => $_GET["id"]
     );
     deleteList($data2);
+    deleteListTasks($data2);
     header("location: index.php");
 }
 
@@ -69,16 +78,7 @@ if(isset($_GET["id"])) {
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+
 
   
 
@@ -88,7 +88,7 @@ if(isset($_GET["id"])) {
         ?>
         <div class="list-div">
 
-        
+            
             <h2><?=$list["list_name"]?></h2>
             <form method="POST">
                 <div>  
@@ -106,11 +106,20 @@ if(isset($_GET["id"])) {
             
             foreach($tasks as $task) {
                 if($list["id"] == $task["list_id"]) {
+                   
             ?>
 
+            
+
             <div class="task-div">
-                <p><?=$task["task_description"]?></p>
-                <button>edit task</button>
+                <div class="desc-task">
+                    <p><?=$task["task_description"]?></p>
+                </div>
+                
+                <div class="edit-task">
+                   <a href="editTask.php?id=<?=$task["id"]?>">Edit Task</a>
+                </div>
+               
                 <div class="delete-task">
                     <form method="POST">
                         <input type="hidden" id="<?=$task["list_id"]?>" name="taskID" value="<?=$task["id"]?>">
@@ -131,9 +140,22 @@ if(isset($_GET["id"])) {
             <form method="POST">
                     <div>
                         <input type="hidden" id="<?=$list["id"]?>" name="idList" value="<?=$list["id"]?>">
-                        <label for="contentTask">Task name</label>
-                        <input name="contentTask" id="contentTask" type="text">
-                        <button type="submit">Add new task</button>
+                        <textarea name="contentTask" placeholder="Add another card" id="contentTask" cols="30" rows="2"></textarea>
+                        <label for="time">Duration</label>
+                        <input name="time" type="number">
+                        <select name="taskStatus" id="taskStatus">
+
+                            <?php
+                            foreach ($statusOptions as $statusOption) {
+                            ?>
+                            <option value="<?=$statusOption["name"]?>"><?=$statusOption["name"]?></option>
+                            <?php
+                            }
+                            ?>
+
+
+                        </select>
+                        <button type="submit" id="add-btn">Add new task</button>
                     </div>
                 </form>
             </div>
@@ -155,107 +177,11 @@ if(isset($_GET["id"])) {
             <div>
                 <label for="nameList">Add new list</label>
                 <input name="nameList" id="nameList" type="text">
-                <button type="submit">Add</button>
+                <button type="submit" id="">Add</button>
             </div>
         </form>
         
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     <!-- <div class="main-div">
-        
-
-        <?php
-    
-            $allTabes = getAllTabes();
-            
-        foreach($allTabes as $allTabe) {
-        
-        ?>
-        <div class="list-div">
-
-            <?php 
-            
-            
-            ?>
-            <h2><?=$allTabe["list_name"]?></h2>
-            <form method="POST">
-                <div>  
-                    <input type="hidden" id="<?//=$list["id"]?>" name="id" value="<?//=$list["id"]?>">
-                    <input name="editName" id="editName" type="text">
-                    <button type="submit">Edit name</button>
-                </div>
-            </form>
-                
-            <a href="index.php?id=<?//=$list["id"]?>">Delete</a>
-            
-            <div class="task-div">
-
-            
-
-         
-                <p><?=$allTabe["task_description"]?></p>
-          
-               
-            </div>
-
-
-            <div class="create-task">
-            <form method="POST">
-                    <div>
-                        <input type="hidden" id="<?//=$list["id"]?>" name="idList" value="<?//=$list["id"]?>">
-                        <label for="contentTask">Task name</label>
-                        <input name="contentTask" id="contentTask" type="text">
-                        <button type="submit">Add new task</button>
-                    </div>
-                </form>
-            </div>
-
-
-
-            
-        </div>
-
-        <?php
-        }
-        ?>
-
-        
-     
-        <form method="POST">
-            <div>
-                <label for="nameList">Add new list</label>
-                <input name="nameList" id="nameList" type="text">
-                <button type="submit">Add</button>
-            </div>
-        </form>
-        
-    </div>
-    
-    
- 
-    
-</body>
-</html>  -->
+    <?php require('resources/footer.php'); ?>
