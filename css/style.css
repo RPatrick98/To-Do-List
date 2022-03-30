@@ -14,7 +14,9 @@
     background-color: #EBECF0;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    margin-bottom: 40px;
+    margin-right: 10px;
+    margin-bottom: 40px !important;
+    
     
 }
 
