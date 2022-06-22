@@ -13,6 +13,7 @@ function getAllLists() {
 }
 
 
+// Een nieuwe lijst aanmaken
 function createList($data) {
 	$conn = openDatabaseConnection();
 	$query = $conn->prepare("INSERT INTO list (list_name) 
@@ -22,7 +23,7 @@ function createList($data) {
 }
 
 
-
+// Een lijst verdwijderen
 function deleteList($data2) {
 	$conn = openDatabaseConnection();
 	$query = $conn->prepare("DELETE FROM list WHERE id = :id");
@@ -30,6 +31,8 @@ function deleteList($data2) {
 	$query->execute();
 }
 
+
+// Een naam van lijst veranderen 
 function updateList($data3) {
 	$conn = openDatabaseConnection();
 	$query = $conn->prepare("UPDATE list SET list_name = :list_name WHERE id = :id");
@@ -47,6 +50,7 @@ function getAllTasks() {
 	return $result;
 }
 
+// Een niuewe task aanmaken 
 function createTask($data4) {
 	$conn = openDatabaseConnection();
 	$query = $conn->prepare("INSERT INTO tasks (task_description, list_id, task_time, task_status) 
@@ -59,6 +63,8 @@ function createTask($data4) {
 	$query->execute();
 }
 
+
+// Een task ophalen
 function getCatTask($idListTasks) {
 	$conn = openDatabaseConnection();
 
@@ -69,7 +75,7 @@ function getCatTask($idListTasks) {
 	return $result;
 }
 
-// two tabels 
+// Aale tabels ophalen
 
 function getAllTabes() {
 	$conn = openDatabaseConnection();
@@ -83,12 +89,15 @@ function getAllTabes() {
 
 
 
+// Gekozen task verdwijderen
 function deleteTask($data5) {
 	$conn = openDatabaseConnection();
 	$query = $conn->prepare("DELETE FROM tasks WHERE id = :id");
 	$query->bindParam(":id", $data5["taskID"]);
 	$query->execute();
 }
+
+
 
 function deleteListTasks($data2) {
 	$conn = openDatabaseConnection();

@@ -4,6 +4,9 @@ require('resources/header.php');
 
 include("resources/functions.php");
 
+
+
+// hier worden functies aangeroepen om bepaalde dingen van db op te halen
 $lists = getAllLists();
 
 $tasks = getAllTasks();
@@ -19,7 +22,7 @@ $timeHigh = getTimeHigh();
 
 
 
-
+// hier worden verstuurde dingen met POST gecheckt en ingezet aan goeie array
 if( $_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['nameList'])) {
         $data = array(
@@ -106,6 +109,8 @@ if(isset($_GET["id"])) {
     <div class="main-div">
         
         <?php
+
+        // Aanmaken van Lijst
         foreach ($lists as $list) {
         ?>
         <div class="list-div">
@@ -148,7 +153,7 @@ if(isset($_GET["id"])) {
 
             <?php 
 
-            
+            // Aanmaken van task
             foreach($tasks as $task) {
                 if($list["id"] == $task["list_id"]) {
                    
