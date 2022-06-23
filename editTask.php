@@ -12,7 +12,7 @@ if(isset($_GET["id"])) {
     
 } 
 
-$oneTask = getTask($task_id);
+$oneTask = getTask($task_id); 
 
 
 
